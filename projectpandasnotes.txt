@@ -1,0 +1,58 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+1
+df = df.drop("Unnamed: 0", axis = 1)
+df.head(10)
+
+2
+plt.figure(figsize=(5,5))
+ax = sns.countplot(data= df,x = "Gender")
+ax.bar_label(ax.containers[0])
+plt.show()
+
+3
+gb = df.groupby("ParentEduc").agg({"MathScore":'mean',"ReadingScore":'mean',"WritingScore":'mean'})
+
+4
+plt.figure(figsize=(4,5))
+plt.title("Relationship between Parents education and Students Score")
+sns.heatmap(gb, annot= True)
+plt.show()
+
+5
+gb1 = df.groupby("ParentMaritalStatus").agg({"MathScore":'mean',"ReadingScore":'mean',"WritingScore":'mean'})
+gb1
+
+6
+plt.figure(figsize=(5,3))
+sns.heatmap(gb1, annot= True)
+plt.show()
+
+7
+sns.boxplot(data =df, x ="MathScore")
+plt.show()
+
+8
+df["EthnicGroup"].unique()
+
+9
+groupA = df.loc[(df["EthnicGroup"]=="group A")].count()
+groupA
+
+
+10
+groupA = df.loc[(df["EthnicGroup"]=="group A")].count()
+groupB = df.loc[(df["EthnicGroup"]=="group B")].count()
+groupC = df.loc[(df["EthnicGroup"]=="group C")].count()
+groupD = df.loc[(df["EthnicGroup"]=="group D")].count()
+groupE = df.loc[(df["EthnicGroup"]=="group E")].count()
+
+l = ["group A","group B","group C","group D","group E"]
+mlist = [groupA["EthnicGroup"],groupB["EthnicGroup"],groupC["EthnicGroup"],groupD["EthnicGroup"],groupA["EthnicGroup"]]
+plt.pie(mlist, labels=l , autopct= "%1.2f%%")
+plt.show()
+
